@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<!-- Recreación creada por Jered Bazaldua/Killex -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strawberry Panic! - Página de Archivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "MS PGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, Meiryo, Verdana, Arial, sans-serif;
+            background-color: #f0e6f2; 
+            color: #333;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .page-wrapper {
+            width: 760px;
+            margin: 60px auto; 
+            background-color: #fff; 
+            border: 1px solid #ccc;
+            position: relative; 
+        }
+        .corner-decoration {
+            position: absolute;
+            width: 60px; 
+            height: 60px;
+            background-size: 100% 100%; 
+            background-repeat: no-repeat;
+            z-index: 5;
+        }
+        .corner-decoration.top-left { top: -1px; left: -1px; background-image: url('images/Marcoarribaizquierda.png'); }
+        .corner-decoration.top-right { top: -1px; right: -1px; background-image: url('images/Marcoarribaderecha.png'); }
+        .corner-decoration.bottom-left { bottom: -1px; left: -1px; background-image: url('images/Marcoabajoizquierda.png'); }
+        .corner-decoration.bottom-right { bottom: -1px; right: -1px; background-image: url('images/Marcoabajoderecha.png'); }
+        .main-content {
+            padding: 25px 30px; 
+            position: relative; 
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .title-frame {
+            border-top: 2px solid #e0c8e8; 
+            border-bottom: 2px solid #e0c8e8; 
+            padding: 15px 0; 
+            margin-bottom: 25px; 
+        }
+        .main-title-text {
+            font-family: 'Meiryo', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+            font-size: 38px;
+            font-weight: bold;
+            color: #6C2A8A;
+            letter-spacing: 1px;
+            margin-bottom: 0px;
+            text-shadow: 0 0 8px rgba(220, 180, 255, 0.7), 0 0 3px rgba(128, 0, 128, 0.5);
+        }
+        .main-subtitle-text {
+            font-family: 'Verdana', 'Arial', sans-serif;
+            font-size: 18px;
+            color: #8A4B9C;
+            margin-top: -5px;
+        }
+        .main-banner-img,
+        .anime-gif-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+        }
+        .main-banner-img { border: 1px solid #000; }
+        .promo-banner-text-display {
+            display: block;
+            border: 2px solid #FF69B4; 
+            padding: 8px 15px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 15px; 
+            max-width: 90%; 
+            text-align: center;
+        }
+        .promo-banner-text-display p {
+            color: #660099; 
+            font-weight: bold;
+            font-size: 14px; 
+            margin: 0;
+        }
+        section { margin-bottom: 30px; }
+        h2 {
+            font-size: 16px;
+            font-weight: bold;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid;
+        }
+        #broadcast-info h2 { color: #006699; border-bottom-color: #006699;}
+        #broadcast-info .broadcast-ended { color: red; font-weight: bold; text-align: center; margin-top: 10px;}
+        #story h2 { color: #6B8E23; border-bottom-color: #6B8E23; }
+        #school-character h2 { color: #800080; border-bottom-color: #800080; }
+        #staff h2 { color: #6B8E23; border-bottom-color: #6B8E23; }
+        #staff dl { font-size: 12px; padding-left: 15px; }
+        #staff dt {
+            font-weight: bold;
+            color: #444;
+            width: 150px; 
+            float: left;
+            clear: left;
+            margin-bottom: 5px;
+            line-height: 1.4; 
+        }
+        #staff dd {
+            margin-left: 160px; 
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        #staff dl::after { content: ""; display: table; clear: both; }
+        #staff table.cast-table {
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: -2px; 
+        }
+        #staff table.cast-table td {
+            padding: 1px 5px 1px 0; 
+            border: 1px solid #fff; 
+            vertical-align: top;
+        }
+        #staff table.cast-table td:not(:last-child)::after {
+            content: "/";
+            color: #888;
+            margin-left: 5px; 
+        }
+        #broadcast-info table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        #broadcast-info th, #broadcast-info td { border: 1px solid #ccc; padding: 5px 8px; text-align: left; }
+        #broadcast-info th { background-color: #f0f0f0; font-weight: normal; width: 150px; }
+        .school { margin-bottom: 25px; }
+        .school h3 { font-size: 14px; color: #600080; margin-bottom: 10px; font-weight: bold; padding-left: 15px; position: relative; }
+        .school h3::before { content: "●"; color: #800080; position: absolute; left: 0; top: 0; }
+        .school-description { font-size: 12px; margin-bottom: 15px; padding-left: 15px; }
+        .character-item { display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 12px; padding-left: 15px; }
+        .character-portrait { width: 80px; height: 80px; border-radius: 50%; border: 1px solid #aaa; margin-right: 15px; object-fit: cover; flex-shrink: 0; }
+        .character-info h4 { font-size: 13px; font-weight: bold; color: #333; margin-bottom: 3px; }
+        .character-info p { margin-bottom: 2px; }
+        .media-box { background-color: #FFFFE1; border: 1px solid #CCCC00; padding: 15px; font-size: 12px; text-align: center; }
+        .media-box p { margin-bottom: 10px; }
+        .media-box p:last-child { margin-bottom: 0; }
+        .page-footer {
+            text-align: center;
+            font-size: 11px;
+            color: #555;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc; 
+            padding-bottom: 20px; 
+        }
+        a { color: #660099; text-decoration: none; }
+        a:visited { color: #660099; }
+        a:hover { color: #FF3399; text-decoration: underline; }
+        a:active { color: #FF3399; }
+    </style>
+</head>
+<body>
+    <!-- Nagisa-chan, ¿me pregunto si te gustará este lugar? -->
+    <div class="page-wrapper">
+        <div class="corner-decoration top-left"></div>
+        <div class="corner-decoration top-right"></div>
+        <div class="corner-decoration bottom-left"></div>
+        <div class="corner-decoration bottom-right"></div>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div class="title-frame">
+                    <h1 class="main-title-text">ストロベリー・パニック</h1>
+                    <p class="main-subtitle-text">- Strawberry Panic -</p>
+                </div>
+                <!-- Shizuma estuvo aqui -->
+                <img src="images/main04.jpg" alt="Strawberry Panic! - Imagen Promocional Principal" class="main-banner-img">
+                <img src="images/anime.gif" alt="Animación Strawberry Panic" class="anime-gif-img">
+                
+                <div class="promo-banner-text-display">
+                    <p>¡Bienvenido/a a la Colina de Astraea! ¡La página oficial del anime está aquí!</p>
+                </div>
+            </header>
+            
+            <section id="broadcast-info">
+                <h2>Canales y Horarios de Emisión</h2>
+                <table><tbody>
+                        <tr> <th>TV Kanagawa</th> <td>Todos los lunes</td> <td>26:45～27:15</td> </tr>
+                        <tr> <th>TV Saitama</th> <td>Todos los sábados</td> <td>25:30～26:00</td> </tr>
+                        <tr> <th>Chiba TV</th> <td>Todos los jueves</td> <td>25:55～26:25</td> </tr>
+                        <tr> <th>TV Osaka</th> <td>Todos los sábados</td> <td>26:50～27:20</td> </tr>
+                        <tr> <th>TV Aichi</th> <td>Todos los lunes</td> <td>26:43～27:13</td> </tr>
+                        <tr> <th>Kids Station</th> <td>Todos los martes</td> <td>24:00～24:30</td> </tr>
+                </tbody></table>
+                <p class="broadcast-ended">La emisión ha finalizado.</p>
+            </section>
+            <!-- El secreto de la Colina de Astraea... yace entre estas líneas. -->
+            <section id="story">
+                <h2>HISTORIA</h2>
+                <p>La Colina de Astraea. Allí se alzaban tres escuelas femeninas.</p>
+                <p>La Academia Femenina St. Miator. La Academia Femenina St. Spica. La Academia Femenina St. Lulim.</p>
+                <p>Y, en los confines del terreno, se encontraba la residencia común para las tres escuelas, la Residencia Fresa (Ichigo Sha).</p>
+                <p>La Colina de Astraea... un santuario donde los chicos no podían entrar...</p>
+                <p>Aoi Nagisa, la protagonista, se transfiere al cuarto año (equivalente al primer año de preparatoria en un sistema de educación continuada) de la Academia Femenina St. Miator debido a ciertas circunstancias. En su primer día, conoce a la admirada "Etoile" (que significa "estrella" en francés; la Etoile es la figura que une los consejos estudiantiles de las tres escuelas, ostentando gran poder y prestigio, pero también pesadas responsabilidades) Hanazono Shizuma. En el instante en que queda cautivada por su belleza, su cuerpo se paraliza.</p>
+                <p>Mientras tanto, Shizuma, observando a Nagisa con ternura, extiende sus manos hacia los hombros de Nagisa, acerca su rostro y... ¿¡...!?</p>
+                <p>Una vida escolar teñida de yuri, protagonizada por chicas de diferentes años y escuelas, cada una con sus propios sentimientos.</p>
+                <p>¿No te gustaría echar un vistazo a los sucesos de este jardín secreto...?</p>
+            </section>
+
+            <section id="school-character">
+                <h2>Escuelas y Personajes</h2>
+                <!-- La próxima Etoile saldrá de una de estas escuelas... ¿o quizás no? -->
+                <article class="school" id="miatoru">
+                    <h3>Academia Femenina St. Miator</h3>
+                    <p class="school-description">La escuela femenina más antigua de la Colina de Astraea, con un monasterio como entidad matriz. Es conocida por su alto número de estudiantes de familias prestigiosas, educación y disciplina estrictas, y la mayoría de las estudiantes se comprometen antes de graduarse. Las clases extracurriculares como la ceremonia del té, los arreglos florales y la danza japonesa también son populares.</p>
+                    <div class="character-list">
+                        <div class="character-item"> <img src="images/tvchar_01.gif" alt="Aoi Nagisa" class="character-portrait"> <div class="character-info"> <h4>Aoi Nagisa (4º Grado)</h4> <p>CV: Mai Nakahara</p> <p>Cuando tiene prisa o se sorprende, inmediatamente entra en pánico. Fue la única estudiante en Miator (una institución con educación secundaria y preparatoria integrada) a quien se le permitió transferirse desde otra escuela secundaria.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_02.gif" alt="Hanazono Shizuma" class="character-portrait"> <div class="character-info"> <h4>Hanazono Shizuma (6º grado)</h4> <p>CV: Hitomi Namatame</p> <p>Como Etoile, tiene el poder de unir los consejos estudiantiles de las tres escuelas. Es la número 1 en belleza de la academia, cautivando a todos a su alrededor con solo caminar. A veces muestra interés por algunas estudiantes de primer año, pero se aburre rápidamente de ellas.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_03.gif" alt="Suzumi Tamao" class="character-portrait"> <div class="character-info"> <h4>Suzumi Tamao (4º grado)</h4> <p>CV: Ai Shimizu</p> <p>Es compañera de clase de Nagisa y comparte habitación con ella en la residencia. Quiere cuidar en todo lo posible a Nagisa, que se acaba de incorporar.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_04.gif" alt="Tsukidate Chiyo" class="character-portrait"> <div class="character-info"> <h4>Tsukidate Chiyo (1er Grado)</h4> <p>CV: Chiwa Saito</p> <p>De carácter algo débil, tímida y llorona. Es popular entre las estudiantes mayores. Siguiendo la costumbre de las estudiantes de primer año, se convierte en la encargada de la habitación de estudiantes de cursos superiores, quedando al servicio de Nagisa y Tamao.</p> </div> </div>
+                    </div>
+                </article>
+                <article class="school" id="spica">
+                    <h3>Academia Femenina St. Spica</h3>
+                    <p class="school-description">Fundada después de Miator, es una escuela de señoritas que, sin embargo, enfatiza la incursión de las mujeres en la sociedad. Además de los estudios, deportes como la natación y la equitación son populares.</p>
+                    <div class="character-list">
+                        <div class="character-item"> <img src="images/tvchar_05.gif" alt="Konohana Hikari" class="character-portrait"> <div class="character-info"> <h4>Konohana Hikari (3er año)</h4> <p>CV: Miyu Matsuki</p> <p>Una chica hermosa y popular en la academia que ama las cosas bellas. Pasa días emocionantes en Spica, rodeada de belleza.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_06.gif" alt="Ootori Amane" class="character-portrait"> <div class="character-info"> <h4>Ootori Amane (5º año)</h4> <p>CV: Yuko Kaida</p> <p>La "príncipe" número 1 y objeto de admiración en la academia. Es la estrella del club de equitación.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_07.gif" alt="Nanto Yaya" class="character-portrait"> <div class="character-info"> <h4>Nanto Yaya (3er año)</h4> <p>CV: Natsuko Kuwatani</p> <p>Compañera de clase de Hikari. Hija de una familia acaudalada (zaibatsu). Su interés por las mujeres es extraordinariamente fuerte.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_08.gif" alt="Okuwaka Tsubomi" class="character-portrait"> <div class="character-info"> <h4>Okuwaka Tsubomi (1er año)</h4> <p>CV: Sakura Nogawa</p> <p>Alegre, proactiva y sociable.</p> </div> </div>
+                    </div>
+                </article>
+                <!-- ¿Y si Lulim da la sorpresa este año? -->
+                <article class="school" id="lulim">
+                    <h3>Academia Femenina St. Lulim</h3>
+                    <p class="school-description">La más nueva de las tres escuelas, conocida por su ambiente libre, relajado y tranquilo. Las relaciones jerárquicas entre estudiantes son más laxas en comparación con las otras dos escuelas. Las actividades de club son muy populares y las estudiantes pueden fundar los suyos propios, lo que ha llevado a la proliferación de clubes peculiares.</p>
+                    <div class="character-list">
+                        <div class="character-item"> <img src="images/tvchar_09.gif" alt="Hyuga Kizuna" class="character-portrait"> <div class="character-info"> <h4>Hyuga Kizuna (2º año)</h4> <p>CV: Ai Shimizu</p> <p>Aunque mayor, su personalidad es infantil y un poco traviesa. Gracias a ello, se ha vuelto muy popular en la escuela rápidamente.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_10.gif" alt="Minamoto Chikaru" class="character-portrait"> <div class="character-info"> <h4>Minamoto Chikaru (5º año)</h4> <p>CV: Saki Nakajima</p> <p>Presidenta del consejo estudiantil de Lulim. Es tranquila y su amable atmósfera la convierte en la número 1 de la escuela. Tiende a fantasear mucho y es una "onee-sama" un poco mayor.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_11.gif" alt="Natsume Remon" class="character-portrait"> <div class="character-info"> <h4>Natsume Remon (2º año)</h4> <p>CV: Ui Miyazaki</p> <p>Compañera de clase de Kizuna. Una chica alegre y vivaz.</p> </div> </div>
+                        <div class="character-item"> <img src="images/tvchar_12.gif" alt="Byakudan Kagome" class="character-portrait"> <div class="character-info"> <h4>Byakudan Kagome (1er año)</h4> <p>CV: Yukari Fukui</p> <p>Siempre lleva un osito de peluche. Le gustan las "onee-sama" amables.</p> </div> </div>
+                    </div>
+                </article>
+                <article class="school" id="astraea-dorm">
+                    <h3>Residencia Astraea (Apodo: Residencia Fresa / Ichigo Sha)</h3>
+                    <p class="school-description">Es la residencia preparada para las estudiantes que vienen de lejos. Sin embargo, en realidad, muchas chicas de familias distinguidas ingresan para experimentar la vida en común. Como los edificios de las residencias de cada escuela forman un triángulo, se la conoce como la "Residencia Fresa". Salir requiere permiso para todo, y las pernoctaciones fuera están estrictamente controladas. Las doce heroínas de esta historia residen todas en la Residencia Fresa.</p>
+                </article>
+            </section>
+            <!-- Yo sere quien gane la Corona de Etoile S.H (Shizuma Hanazono) -->
+            <section id="staff">
+                <h2>EQUIPO DE PRODUCCIÓN</h2>
+                <dl>
+                    <dt>Director</dt><dd>Masayuki Sakoi</dd> 
+                    <dt>Obras Destacadas</dt><dd>『Saint Beast』</dd>
+                    <dt>Composición de Serie</dt><dd>Tatsuhiko Urahata</dd> 
+                    <dt>Obras Destacadas</dt><dd>『D・N・A² ~Dokokade Nakushita Aitsu no Aitsu~』 / 『Cardcaptor Sakura』</dd>
+                    <dt>Guion</dt><dd>Tatsuhiko Urahata, Hideo Takayashiki, Kazuyuki Fudeyasu</dd> 
+                    <dt>Obras Dest. (Takayashiki)</dt><dd>『Oniisama e...』 / 『Okusama wa Joshikousei』</dd> 
+                    <dt>Obras Dest. (Fudeyasu)</dt><dd>『GUNSLINGER GIRL』 / 『Zoids Genesis』</dd>
+                    <dt>Diseño de Personajes</dt><dd>Kyuuta Sakai</dd> 
+                    <dt>Obras Destacadas</dt><dd>『Binchou-tan』 / 『Ichigo Mashimaro』</dd>
+                    <dt>Director de Arte</dt><dd>Yuka Okamoto</dd> 
+                    <dt>Obras Destacadas</dt><dd>『Okusama wa Joshikousei』</dd>
+                    <dt>Diseño de Color</dt><dd>Shuji Uemura</dd> 
+                    <dt>Obras Destacadas</dt><dd>『Mistral Rouge』 / 『Elfen Lied』 (Asistente de Color)</dd>
+                    <dt>Director de Sonido</dt><dd>Hajime Takakuwa</dd> 
+                    <dt>Obras Destacadas</dt><dd>『Gensomaden Saiyuki Movie』 / 『Okusama wa Joshikousei』</dd>
+                    <dt>Producción de Sonido</dt><dd>Jinnan Studio</dd> 
+                    <dt>Obras Destacadas</dt><dd>『Gilgamesh』 / 『Okusama wa Joshikousei』</dd>
+                    <dt>Producción de Animación</dt><dd>Madhouse</dd> 
+                    <dt>Obras Destacadas</dt><dd>『Ichigo 100%』 / 『Paradise Kiss』</dd>
+                    <dt>Obra Original</dt><dd>Sakurako Kimino<br>『Strawberry Panic!』 (Publicado por Dengeki Bunko / Serializado en Dengeki G's Magazine)</dd> 
+                    <dt>Diseño Original de Personajes</dt><dd>Chitose Maki・Takuminamuchi</dd> 
+                    <dt>Producción</dt><dd>Ichigosha</dd> 
+                    <dt>Reparto (CVs)</dt>
+                    <dd>
+                        <table class="cast-table">
+                            <tr>
+                                <td>Mai Nakahara</td> <td>Ai Shimizu</td> <td>Hitomi Nabatame</td> <td>Chiwa Saito</td>
+                            </tr>
+                            <tr>
+                                <td>Miyu Matsuki</td> <td>Yuko Kaida</td> <td>Natsuko Kuwatani</td> <td>Sakura Nogawa</td>
+                            </tr>
+                            <tr>
+                                <td>Saki Nakajima</td> <td>Ui Miyazaki</td> <td>Yukari Fukui</td> <td></td>
+                            </tr>
+                        </table>
+                    </dd>
+                </dl>
+            </section>
+            <!-- Un brindis por las Etoiles pasadas, presentes y futuras. -->
+            <section id="related-media">
+                <div class="media-box">
+                    <p><strong>Versión Novela『Strawberry Panic!』(1) ～ (3)</strong><br>¡A la venta por Dengeki Bunko, con gran acogida!</p>
+                    <p><strong>Versión Cómic『Strawberry Panic!』(1) ～ (2)</strong><br>¡A la venta! (Serializado en la revista mensual "Dengeki G's Magazine")</p>
+                </div>
+            </section>
+
+            <footer class="page-footer">
+                <p class="usage-notice">Se prohíbe la cita o reproducción no autorizada de cualquier imagen, texto o dato contenido en esta página.</p>
+                <p class="copyright-main">(C) Sakurako Kimino・MediaWorks／Ichigosha</p>
+            </footer>
+        </main>
+    </div>
+    <!-- Fin de la Recreación creada por Jered Bazaldua/Killex -->
+</body>
+</html>
